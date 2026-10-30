@@ -44,41 +44,55 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4  gap-5 ">
                 <!------------ Cards 1-------------->
 
-                <div class="bg-white border border-gray-200 rounded-xl p-7 text-center shadow-sm gap-6">
+                <div class="bg-white border border-red-700 rounded-xl p-7 text-center shadow-sm gap-6">
                     <img src="./images/avatar1.png" class="w-20 h-20 rounded-full mx-auto mb-3">
                     <p class="font-bold text-lg">Regina</p>
                     <p class="text-gray-500 text-sm mb-4"> 12 parties</p>
-                    <div class="flex-justify-center gap-8">
+                    <div class="flex-justify-center gap-8 p-3">
                         <button class="text-gray-800">​🖋️</button>
-                        <button class="text-red-500">​🗑️</button>
+                        <button class="text-red-500 hover:bg-amber-400 transition-colors text-red-500">❌</button>
                     </div>
                 </div>
 
-           <div class="bg-white border border-gray-200 rounded-xl p-7 text-center shadow-sm">
+                <div class="bg-white border border-red-700 rounded-xl p-7 text-center shadow-sm">
                     <img src="./images/avatar2.png" class="w-20 h-20 rounded-full mx-auto mb-3">
                     <p class="font-bold text-lg">ApexLegend</p>
                     <p class="text-gray-500 text-sm mb-4"> 8 parties</p>
-                    <div class="flex-justify-center gap-8" >
-                        <button class="text-gray-800">​🖋️</button>
-                        <button class="text-red-500">​🗑️</button>
+                    <div class="flex-justify-center gap-8 p-3">
+                        <button class="text-gray-800 ">​🖋️</button>
+                        <button class="text-sm">❌</button>
                     </div>
                 </div>
-                 <div class="bg-white border border-gray-200 rounded-xl p-7 text-center shadow-sm">
+                <div class="bg-white border border-red-700 rounded-xl p-7 text-center shadow-sm">
                     <img src="./images/avatar3.png" class="w-20 h-20 rounded-full mx-auto mb-3">
                     <p class="font-bold text-lg">Azura</p>
                     <p class="text-gray-500 text-sm mb-4"> 5 parties</p>
-                    <div class="flex-justify-center gap-8" >
+                    <div class="flex-justify-center gap-8 p-3">
                         <button class="text-gray-800">​🖋️</button>
-                        <button class="text-red-500">​🗑️</button>
+                        <button class="text-red-500 hover:bg-amber-400 transition-colors">❌</button>
                     </div>
                 </div>
-                 <div class="bg-white border border-gray-200 rounded-xl p-7 text-center shadow-sm">
+                <div class="bg-white border border-red-700 rounded-xl p-7 text-center shadow-sm">
                     <img src="./images/avatar5.png" class="w-20 h-20 rounded-full mx-auto mb-3">
                     <p class="font-bold text-lg">Astrid</p>
                     <p class="text-gray-500 text-sm mb-4"> 3 parties</p>
-                    <div class="flex-justify-center gap-8" >
+                    <div class="flex-justify-center gap-8 p-3">
                         <button class="text-[#181819]">​🖋️</button>
-                        <button class="text-red-500">​🗑️</button>
+                        <button class="text-red-500 hover:bg-amber-400 transition-colors">❌</button>
                     </div>
                 </div>
-          
+                <div class="flex flex-col gap-6 rounded-card bg-[#E5CB90] p-8">
+                    <h2 class="font-display text-3xl font-bold text-red-500">Modifier un profil</h2>
+                    <p class="text-sm">pseudo </p>
+                    <label class="flex w-full max-w-md flex-col gap-2 text-sm font-bold">
+
+                        <input placeholder="Astrid..." class="field font-normal border rounded-lg p-4">
+                    </label>
+                    <p class="text-sm"> Avatar</p>
+                    <input placeholder="" class="field font-normal border rounded-lg p-4">
+                    <button><span
+                        class="chip px-6 py-3 rounded-xl bg-cover bg-red-700 bg-center text-white font-bold text-sm text-slate-900 hover:bg-amber-400 transition-colors">
+                      Enregistrer les modifications </span>
+                </button>
+                    
+                </div>
