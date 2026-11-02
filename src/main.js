@@ -15,10 +15,25 @@ addButton.addEventListener("click",function(){
     formContainer.classList.remove("hidden");
     formContainer.classList.add("flex");
 });
-//ajout profil
+
 form.addEventListener("submit",function(e){
     e.preventDefault();
-    profils=AjouterProfil(profils,nickname.ariaValueMax,avatar.value);
+    //validation pseudo
+    const pseudo=nickname.value.trim();
+    const regex=/^[A-Za-z0-9]{3,15}$/;
+    const error=document.getElementById("nickname-error");
+    error.textContent="";
+    if(!regex.test(pseudo)){
+        error.textContent="pseudo invalide (3 à 15 caractères)";
+        return;
+    }
+    const existe = profils.some(profil=>profil.nickname.toLowerCase()===pseudo.toLowerCase());
+    if(existe){
+        error.textContent="ce pseudo est existe déja";
+        return;
+    }
+    //ajout profil
+    profils=AjouterProfil(profils,nickname.value,avatar.value);
     afficherProfils(profils);
     form.reset();
     formContainer.classList.add("hidden");
