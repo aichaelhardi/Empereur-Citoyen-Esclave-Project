@@ -1,26 +1,26 @@
-const profils=[
+export const profils=[
     { 
         id:"p1",
         nickname:"Regina",
-        avatar:"Avatar1",
+        avatar:"avatar1",
 
     },
      { 
         id:"p2",
         nickname:"Apexlegend",
-        avatar:"Avatar2",
+        avatar:"avatar2",
 
     },
      { 
         id:"p3",
         nickname:"Azura",
-        avatar:"Avatar3",
+        avatar:"avatar3",
 
     },
      { 
         id:"p4",
         nickname:"Astrid",
-        avatar:"Avatar5",
+        avatar:"avatar5",
 
     },
 ];
