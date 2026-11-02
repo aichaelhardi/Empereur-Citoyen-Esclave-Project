@@ -1,55 +1,55 @@
 
 import { profils as profilsData } from "./data.js";
 import { afficherProfils } from "./ui.js";
-import{ AjouterProfil } from "./players.js";
-let profils=[...profilsData];
+import { AjouterProfil } from "./players.js";
+let profils = [...profilsData];
 //afficher les profils
 afficherProfils(profils);
-const addButton=document.getElementById("add-profile");
-const formContainer=document.getElementById("profile-form-container");
-const form=document.getElementById("profile-form");
-const nickname=document.getElementById("nickname");
-const avatar=document.getElementById("avatar");
-const profilesContainer=document.getElementById("profiles-container");
+const addButton = document.getElementById("add-profile");
+const formContainer = document.getElementById("profile-form-container");
+const form = document.getElementById("profile-form");
+const nickname = document.getElementById("nickname");
+const avatar = document.getElementById("avatar");
+const profilesContainer = document.getElementById("profiles-container");
 //variable pour modification
 
-let profilAModifier=null;
+let profilAModifier = null;
 
 //afficher formulaire
-addButton.addEventListener("click",function(){
+addButton.addEventListener("click", function () {
     formContainer.classList.remove("hidden");
     formContainer.classList.add("flex");
 });
 
-form.addEventListener("submit",function(e){
+form.addEventListener("submit", function (e) {
     e.preventDefault();
     //validation pseudo
-    const pseudo=nickname.value.trim();
-    const regex=/^[A-Za-z0-9]{3,15}$/;
-    const error=document.getElementById("nickname-error");
-    error.textContent="";
-    if(!regex.test(pseudo)){
-        error.textContent="pseudo invalide (3 à 15 caractères)";
+    const pseudo = nickname.value.trim();
+    const regex = /^[A-Za-z0-9]{3,15}$/;
+    const error = document.getElementById("nickname-error");
+    error.textContent = "";
+    if (!regex.test(pseudo)) {
+        error.textContent = "pseudo invalide (3 à 15 caractères)";
         return;
     }
-    const existe = profils.some(profil=>profil.nickname.toLowerCase()===pseudo.toLowerCase());
-    if(existe){
-        error.textContent="ce pseudo est existe déja";
+    const existe = profils.some(profil => profil.nickname.toLowerCase() === pseudo.toLowerCase());
+    if (existe) {
+        error.textContent = "ce pseudo est existe déja";
         return;
     }
-    if(avatar.value===""){
+    if (avatar.value === "") {
         alert("choisissez un avatar");
         return;
 
     }
     //ajout profil
-    if(profilAModifier!==null){
+    if (profilAModifier !== null) {
         const profil = profils.find(p => p.id == profilAModifier);
         profil.nickname = pseudo;
-        profil.avatar =avatar.value;
+        profil.avatar = avatar.value;
         profilAModifier = null;
-    }else{
-        profils = AjouterProfil(profils,pseudo,avatar.value);
+    } else {
+        profils = AjouterProfil(profils, pseudo, avatar.value);
     }
     afficherProfils(profils)
     form.reset();
@@ -57,16 +57,27 @@ form.addEventListener("submit",function(e){
     formContainer.classList.remove("flex");
 });
 //Modifier profil
-profilesContainer.addEventListener("click",function(e){
-    if(e.target.classList.contains("modifier-btn")){
+profilesContainer.addEventListener("click", function (e) {
+    if (e.target.classList.contains("modifier-btn")) {
         const id = e.target.dataset.id;
-        const profil = profils.find(p=>p.id===id);
+        const profil = profils.find(p => p.id === id);
         profilAModifier = id;
         nickname.value = profil.nickname;
         avatar.value = profil.avatar;
         formContainer.classList.remove("hidden");
         formContainer.classList.add("flex");
         document.getElementById("form-title").textContent = "Modifier un profil";
+    }
+});
+//supprimer profil
+profilesContainer.addEventListener("click", function (e) {
+    if (e.target.classList.contains("supprimer-btn")) {
+        const id = e.target.dataset.id;
+        const confirmation = confirm("voulez vous supprimer ce profil?");
+        if (confirmation) {
+            profils = profils.filter(p => p.id != id);
+            afficherProfils(profils);
+        }
     }
 });
 
