@@ -10,6 +10,11 @@ const formContainer=document.getElementById("profile-form-container");
 const form=document.getElementById("profile-form");
 const nickname=document.getElementById("nickname");
 const avatar=document.getElementById("avatar");
+const profilesContainer=document.getElementById("profiles-container");
+//variable pour modification
+
+let profilAModifier=null;
+
 //afficher formulaire
 addButton.addEventListener("click",function(){
     formContainer.classList.remove("hidden");
@@ -32,12 +37,37 @@ form.addEventListener("submit",function(e){
         error.textContent="ce pseudo est existe déja";
         return;
     }
+    if(avatar.value===""){
+        alert("choisissez un avatar");
+        return;
+
+    }
     //ajout profil
-    profils=AjouterProfil(profils,nickname.value,avatar.value);
-    afficherProfils(profils);
+    if(profilAModifier!==null){
+        const profil = profils.find(p => p.id == profilAModifier);
+        profil.nickname = pseudo;
+        profil.avatar =avatar.value;
+        profilAModifier = null;
+    }else{
+        profils = AjouterProfil(profils,pseudo,avatar.value);
+    }
+    afficherProfils(profils)
     form.reset();
     formContainer.classList.add("hidden");
     formContainer.classList.remove("flex");
+});
+//Modifier profil
+profilesContainer.addEventListener("click",function(e){
+    if(e.target.classList.contains("modifier-btn")){
+        const id = e.target.dataset.id;
+        const profil = profils.find(p=>p.id===id);
+        profilAModifier = id;
+        nickname.value = profil.nickname;
+        avatar.value = profil.avatar;
+        formContainer.classList.remove("hidden");
+        formContainer.classList.add("flex");
+        document.getElementById("form-title").textContent = "Modifier un profil";
+    }
 });
 
 
