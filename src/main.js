@@ -95,6 +95,6 @@ commencerButton.addEventListener("click" ,function(){
         alert ("veuillez choisir un joueur avant de commencer !");
         return;
     }
-    alert("bonne chance " + joueurActuel );
+    alert("bonne chance " + joueurActuel.nickname );
 });
 
