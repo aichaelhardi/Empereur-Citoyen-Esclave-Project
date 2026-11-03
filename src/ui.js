@@ -10,6 +10,9 @@ export function afficherProfils(profils){
             :`<div class="text-6xl">${profil.avatar}</div>`
         }
         <h3 class="font-bold text-xl">${profil.nickname}</h3>
+        <p class="text-sm text-gray-700">
+        parties jouées : ${profil.partiesJouees || 0}
+        </p>
         <div class="flex gap-3">
         <button class=" modifier-btn bg-blue-700 text-white px-4 py-2 rounded-lg" 
         data-id="${profil.id}">Modifier
