@@ -95,6 +95,12 @@ commencerButton.addEventListener("click" ,function(){
         alert ("veuillez choisir un joueur avant de commencer !");
         return;
     }
+    
     alert("bonne chance " + joueurActuel.nickname );
+    
+    window.location.href = "./jouer.html";
 });
+const profil = profils.find( p => p.id === PageTransitionEvent.playerId);
+const pseudo = profil? profil.nickname : "Joueur supprimé";
+
 
