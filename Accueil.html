@@ -75,26 +75,111 @@
 
 
 
-    <!------------------ Footer----------------------->
+    <!------------------ Footer-----------------------><!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> Empereur, Citoyen, Esclave </title>
+    <link href="./css/output.css" rel="stylesheet">
+</head>
+
+<body class="bg-cover bg-center bg-no-repeat min-h-screen bg-fixed bg-[#F5F5DC]">
+    <!-- ===================== EN-TÊTE ===================== -->
+    <header>
+        <div class="flex w-full items-center justify-between px-1 py-1 sm:px-1 lg:px-4 bg-[#191818]">
+
+            <div class="flex items-center gap-3">
+                <img class="h-15 w-20" src="./images/King.png" alt="logo">
+                <span class="rounded-full text-white  px-7 py-8 font-extrabold text-900 hover "><span
+                        style=" color:#181819;">👑</span> ​Empereur • Citoyen • Esclave</span>
+
+            </div>
+            <nav aria-label="Navigation principale" class="flex flex-wrap gap-2">
+                <a href="#accueil"
+                    class="rounded-full bg-white px-4 py-2 font-bold text-slate-900 hover:bg-amber-400 transition-colors">ACCUEIL</a>
+                <a href="#jouer"
+                    class="rounded-full bg-white px-4 py-2 font-bold text-slate-900 hover:bg-amber-400 transition-colors">Jouer</a>
+                <a href="#profil"
+                    class="rounded-full bg-white px-4 py-2 font-bold text-slate-900 hover:bg-amber-400 transition-colors">Profil</a>
+                <a href="#historique"
+                    class="rounded-full bg-white px-4 py-2 font-bold text-slate-900 hover:bg-amber-400 transition-colors">Historique</a>
+            </nav>
+        </div>
+    </header>
+    <main class="max-w-7xl px-8 py-8">
+        <!-- ===================== Profil Page ===================== -->
+        <section id="profil" class="flex flex-wrap w-full justify-between gap-6 p-6  ">
+            <div class="flex items-center justify-between w-full">
+                <h1 class="text-4xl font-bold ">👥Mes profils</h1>
+                <button id="add-profile" type="button"><span
+                        class="chip px-6 py-3 rounded-xl bg-cover bg-red-700 bg-center text-white font-bold text-sm text-slate-900 hover:bg-amber-400 transition-colors">+
+                        Ajouter un profil</span>
+                </button>
+            </div>
+            <!------------------ les cartes des profils ----------------->
+            <div id="profiles-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 w-full ">
+            </div>
+            <!------------------Modifier un profil------------------>
+
+
+            <div id="profile-form-container" class="hidden flex-col gap-6 rounded-xl bg-[#E5CB90] p-8 w-full">
+                <h2 id="form-title" class="font-bold text-3xl text-red-500">Ajouter un profil</h2>
+                <form id="profile-form" class="flex flex-col gap-4">
+                    <!-------------- pseudo--------------->
+                    <label class="flex flex-col gap-2 font-bold">pseudo
+                        <input type="text" id="nickname" placeholder="Exemple:Astrid 07"
+                            class="border rounded-lg p-4 font-normal">
+                        <span id="nickname-error" class="text-red-600 text-sm"></span>
+                    </label>
+                    <!----------- Avatar------------>
+                    <label class="flex flex-col gap-2 font-bold">Avatar
+                        <select id="avatar" class="border rounded-lg p-4 font-normal">
+                            <option value="">choisir un avatar</option>
+                            <option value="👸">👸​</option>
+                            <option value="🧟​">🧟​</option>
+                            <option value="🥷">🥷</option>
+                            <option value="🧛‍♀️​">🧛‍♀️​</option>
+                            <option value="​🫈">​🫈</option>
+                            <option value="🦹​">🦹​</option>
+                        </select>
+                    </label>
+                    <!---------Button-------->
+                    <div class="flex gap-4 flex-wrap">
+                        <button type="submit"
+                            class="bg-red-700 text-white px-6 py-3 rounded-xl hover:bg-amber-400">Enregistrer</button>
+                        <button type="button" id="cancel-profile"
+                            class="bg-gray-500 text-white px-6 py-3 rounded-xl hover:bg-amber-400">Annuler</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <script type="module" src="./src/main.js"></script>
+        
+        </main>
+    </body>
+</html>
     <footer class="w-full max-w-6xl mx-auto px-4 sm:px-6 pb-8">
       <div class=" grid grid-cols-1 sm:grid-cols-3 gap-6 bg-[#191818] rounded-2xl p-5 sm:p-6 border border-white/10">
 
         <div class="flex items-center gap-3 sm:border-r sm:border-white/20 sm:pr-4">
-          <span class="text-3xl shrink-0">cart</span>
+          <span class="text-3xl shrink-0">🃏</span>
           <div class="text-left">
-            <h3 class="text-white font-bold text-sm"> cree ton profil</h3>
+            <h3 class="text-white font-bold text-sm"> créé ton profil</h3>
             <p class="text-gray-400 text-xs mt-2">Choisis ton pseudo et ton avatar</p>
           </div>
         </div>
         <div class="flex items-center gap-3 sm:border-r sm:border-white/20 sm:pr-4">
-          <span class="text-3xl shrink-0">manette</span>
+          <span class="text-3xl shrink-0">🎮</span>
           <div class="text-left">
             <h3 class="text-white font-bold text-sm "> Joue contre l'ordinateur</h3>
             <p class="text-gray-400 text-xs mt-2"> 12 manches. 5 duels max par manche</p>
           </div>
         </div>
         <div class="flex items-center gap-3">
-          <span class="text-3xl shrink-0"> kas</span>
+          <span class="text-3xl shrink-0"> 🏆</span>
           <div class="text-left">
             <h3 class="text-white font-bold text-sm"> Grimpe dans le classement</h3>
             <p class="text-gray-400 text-xs mt-2"> Suis ton historique et tes performances</p>

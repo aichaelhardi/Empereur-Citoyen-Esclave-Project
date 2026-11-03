@@ -14,12 +14,16 @@ export function afficherProfils(profils){
         parties jouées : ${profil.partiesJouees || 0}
         </p>
         <div class="flex gap-3">
-        <button class=" modifier-btn bg-blue-700 text-white px-4 py-2 rounded-lg" 
-        data-id="${profil.id}">Modifier
+         <button class="choisir-btn bg-red-500 text-white px-4 py-2 rounded-lg"
+        data-id="${profil.id}">choisir
         </button>
-         <button class="supprimer-btn bg-red-700 text-white px-4 py-2 rounded-lg"
-         data-id="${profil.id}">Supprimer
+        <button class=" modifier-btn bg-blue-700  px-4 py-2 rounded-lg" 
+        data-id="${profil.id}">🔄
         </button>
+         <button class="supprimer-btn bg-red-700  px-4 py-2 rounded-lg"
+         data-id="${profil.id}">🗑️
+        </button>
+      
         </div>
         </div>
         `;

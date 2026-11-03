@@ -14,6 +14,7 @@ const profilesContainer = document.getElementById("profiles-container");
 //variable pour modification
 
 let profilAModifier = null;
+let joueurActuel = null;
 
 //afficher formulaire
 addButton.addEventListener("click", function () {
@@ -80,5 +81,20 @@ profilesContainer.addEventListener("click", function (e) {
         }
     }
 });
-
+//choisir un joueur:
+profilesContainer.addEventListener("click",function(e){
+    if(e.target.classList.contains("choisir-btn")){
+        const id = e.target.dataset.id;
+        joueurActuel = profils.find(p => p.id === id);
+        document.getElementById("joueur-actuel").textContent = "joueur : " +joueurActuel.nickname
+    }
+    });
+const commencerButton = document.getElementById("commencer-partie");
+commencerButton.addEventListener("click" ,function(){
+    if(joueurActuel === null){
+        alert ("veuillez choisir un joueur avant de commencer !");
+        return;
+    }
+    alert("bonne chance " + joueurActuel );
+});
 
