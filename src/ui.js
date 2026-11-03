@@ -21,7 +21,7 @@ export function afficherProfils(profils){
         data-id="${profil.id}">🔄
         </button>
          <button class="supprimer-btn bg-red-700  px-4 py-2 rounded-lg"
-         data-id="${profil.id}">
+         data-id="${profil.id}">🗑️
         </button>
       
         </div>
