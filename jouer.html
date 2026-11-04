@@ -31,37 +31,56 @@
         </div>
     </header>
     <!------------------- jouer page--------------------->
-    <section id="joue" class="flex flex-wrap w-full justify-between gap-6 p-6  ">
-        <div class="flex items-center justify-between gap-4  ">
+    <section id="joue" class="w-full min-h-screen p-1/4  ">
+        <div class="flex gap-4 mb-10 flex-wrap ">
             <div
-                class="flex-items-center gap-3 px-4 py-2 bg-gradient-to-br from-[#30271e]to-[#17120f] border border-[#94764b] rounded-lg shadow-[0_0_8px_rgba(212,166,83,0.15)]">
+                class="flex-items-center gap-3 px-4 py-2 bg-gradient-to-br from-[#30271e]to-[#17120f] border border-[#94764b] rounded-lg">
                 <span class="text-[#d6a653]text-xl">⚔️</span>
                 <span class="text-[#e5d6b5] text-base font-serif">Manche 4/12</span>
             </div>
 
             <div
-                class="flex-items-center gap-3 px-4 py-2 bg-gradient-to-br from-[#30271e]to-[#17120f] border border-[#94764b] rounded-lg shadow-[0_0_8px_rgba(212,166,83,0.15)]">
-                <span class="text-[#d6a653]text-xl">👥</span>
+                class="flex-items-center gap-3 px-4 py-2 bg-gradient-to-br from-[#30271e]to-[#17120f] border border-[#94764b] rounded-lg">
+                <span class="text-[#d6a653] text-xl">👥</span>
                 <span class="text-[#e5d6b5] text-base font-serif"> Score[5-3]</span>
             </div>
-   <!----------------------carte------------------------->
-    <div class=" flex items-center justify-center p-10">
-        <p class="text-3xl  font-bold text-[#C5A05A] "> Duel Actuel
-        </p>
-        </div>
-    <div class="w-56  ">
-        <h2 class=" text-white text-center p-3 font-bold"></h2>
-        <img src="images/esclave.png" class="w-full h-64 object-cover">
-        </div>
-        <span class="text-5xl">⚔️</span>
-        <div class="w-56 ">
-            <h2 class=" text-white text-center p-3 font-bold"></h2>
-            <img src="images/empreur.png" class="w-full h-64 object-cover">
-        </div>
-      
-       
 
+        </div>
+        <!----------------------carte------------------------->
+        <div class="flex flex-col items-center gap-8 p-5">
+            <h2 class="text-2xl font-bold text-[#C5A05A] "> Duel Actuel
+            </h2>
 
+            <div class=" flex items-center justify-center gap-6 w-full flex-nowrap ">
+                <div class="w-40 shrink-0 flex flex-col items-center">
+                    <h2 class="text-white text-xl font-bold mb-3"></h2>
+                    <img src="./images/emperor.png" class="w-full h-auto object-contain rounded-xl">
+                </div>
+                <span class="text-5xl text-[#C5A05A]">VS</span>
+                <div class="w-40 flex flex-col items-center">
+                    <h2 class="text-white text-xl font-bold mb-3"></h2>
+                    <img src="./images/esclave.png" class="w-full h-auto object-contain rounded-xl">
+                </div>
+            </div>
+        </div>
+        <div
+            class="mt-12 mx-auto w-full max-w-4xl border-2 border-[#94764b] rounded-2xl bg-gradient-to-br from-[#30271e]to-[#17120f] border border-[#94764b] rounded-lg">
+            <h2 class="text-center text-2xl font-bold text-[#C5A05A] mb-8">vos cartes</h2>
+            <div class="grid grid-cols-4 gap-5">
+                <div class="border border-[#94764b] rounded-xl p-2 bg-[#211a15]">
+                    <img src="./images/esclave.png" class="w-50 h-auto object-contain">
+                </div>
+                <div class="border border-[#94764b] rounded-xl p-2 bg-[#211a15]">
+                    <img src="./images/citoyen.png" class="w-50 h-auto object-contain">
+                </div>
+                <div class="border border-[#94764b] rounded-xl p-2 bg-[#211a15]">
+                    <img src="./images/citoyen.png" class="w-50 h-auto object-contain">
+                </div>
+                <div class="border border-[#94764b] rounded-xl p-2 bg-[#211a15]">
+                    <img src="./images/citoyen.png" class="w-50 h-auto object-contain">
+                </div>
 
-        </section
-   
+            </div>
+
+        </div>
+    </section
