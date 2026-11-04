@@ -89,3 +89,28 @@ function afficherCartes(){
 }
 distribuerCartes("Empereur");
 afficherCartes();
+let scoreJoueur = 0;
+let scoreOrdinateur = 0;
+let mancheActuelle = 1;
+let joueurPeutJouer = true;
+function choisircartesOrdinateur(){
+    const index = Math.floor (Math.random()*mainOrdinateur.length);
+    return index;
+}
+cartesJoueur.addEventListener("click" ,function(e){
+    console.log("click detecté!")
+    if(!joueurPeutJouer){
+        return;
+    }
+    const carteCliquee = e.target.closest("img");
+    if(!carteCliquee){
+        return;
+    }
+    const index = Number(carteCliquee.dataset.index);
+    const carteJoueur = mainJoueur[index];
+    const indexOrdinateur = choisircartesOrdinateur();
+    const carteOrdinateur = mainOrdinateur[indexOrdinateur];
+    console.log("carte joueur: ",carteJoueur)
+    console.log("carteOrdinateur: " ,carteOrdinateur);
+});
+
