@@ -98,7 +98,6 @@ function choisircartesOrdinateur(){
     return index;
 }
 cartesJoueur.addEventListener("click" ,function(e){
-    console.log("click detecté!")
     if(!joueurPeutJouer){
         return;
     }
