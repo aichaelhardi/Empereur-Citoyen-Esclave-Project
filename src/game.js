@@ -64,6 +64,10 @@ function distribuerCartes(camp){
 }
 const cartesJoueur=document.getElementById ("cartes-joueur");
 const cartesOrdinateur=document.getElementById("cartes-ordinateur");
+const carteJoueurDuel =document.getElementById("carte-joueur-duel");
+const carteOrdinateurDuel= document.getElementById("carte-ordinateur-duel");
+const btnStart=document.getElementById("start-duel");
+const resultatDuel =document.getElementById("resultat-duel");
 function afficherCartes(){
     cartesJoueur.innerHTML="";
     cartesOrdinateur.innerHTML="";
@@ -97,6 +101,29 @@ function choisircartesOrdinateur(){
     const index = Math.floor (Math.random()*mainOrdinateur.length);
     return index;
 }
+function duel(carteJoueur,carteOrdinateur){
+    if(carteJoueur === carteOrdinateur){
+        return "égalité" ;
+    }
+   else if (carteJoueur === "Empereur" && carteOrdinateur === "Citoyen"){
+    return "victoire";
+   }
+   else if(carteJoueur === "Citoyen" && carteOrdinateur ==="Esclave"){
+    return "victoire";
+   }
+   else if (carteJoueur === "Esclave" && carteOrdinateur ==="Empereur"){
+     return "victoire";
+   }
+   else{
+    return "défaite";
+   }
+}
+joueurPeutJouer = false;
+btnStart.addEventListener("click",function(){
+    resultatDuel.textContent="";
+    joueurPeutJouer=true;
+    btnStart.classList.add();
+});
 cartesJoueur.addEventListener("click" ,function(e){
     if(!joueurPeutJouer){
         return;
@@ -109,7 +136,23 @@ cartesJoueur.addEventListener("click" ,function(e){
     const carteJoueur = mainJoueur[index];
     const indexOrdinateur = choisircartesOrdinateur();
     const carteOrdinateur = mainOrdinateur[indexOrdinateur];
-    console.log("carte joueur: ",carteJoueur)
-    console.log("carteOrdinateur: " ,carteOrdinateur)
+    const imageJoueur = cartes.find (c=> c.nom === carteJoueur);
+    const imageOrdinateur = cartes .find(c=> c.nom === carteOrdinateur);
+
+    carteJoueurDuel.innerHTML ="";
+    const imgJoueur=document.createElement("img");
+    imgJoueur.src =imageJoueur.image ;
+    imgJoueur.className ="w-36";
+    carteJoueurDuel .appendChild(imgJoueur);
+    carteOrdinateurDuel .innerHTML="";
+    const imgOrdinateur= document.createElement("img");
+    imgOrdinateur.src =imageOrdinateur.image;
+    imgOrdinateur .className ="w-36";
+    carteOrdinateurDuel.appendChild(imgOrdinateur);
+     //affichage du carte choisi au duel actuel
+     mainJoueur.splice(index, 1);
+     mainOrdinateur.splice(indexOrdinateur, 1);
+     afficherCartes();
+  
 });
 

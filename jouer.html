@@ -16,7 +16,7 @@
             <div class="flex items-center gap-3">
                 <img class="h-15 w-20" src="./images/King.png" alt="logo">
                 <span class="rounded-full text-white  px-7 py-8 font-extrabold text-900 hover "><span
-                        style=" color:#181819;">👑</span> ​Empereur • Citoyen • Esclave</span> jouer.html
+                        style=" color:#181819;">👑</span> ​Empereur • Citoyen • Esclave</span> 
             </div>
             <nav aria-label="Navigation principale" class="flex flex-wrap gap-2">
                 <a href="./Accueil.html"
@@ -68,14 +68,15 @@
                 </h2>
 
                 <div class=" flex items-center justify-center gap-6 w-full flex-nowrap ">
-                    <div class="w-40 shrink-0 flex flex-col items-center">
+                    <div id="carte-joueur-duel" class="w-40 shrink-0 flex flex-col items-center">
                         <h2 class="text-white text-xl font-bold mb-3"></h2>
-                        <img src="./images/emperor.png" class="w-full h-auto object-contain rounded-xl">
+                        <img src="./images/carte vide.png" class="w-full h-auto object-contain rounded-xl">
                     </div>
+        
                     <span class="text-5xl text-[#C5A05A]">VS</span>
-                    <div class="w-40 flex flex-col items-center">
+                    <div id="carte-ordinateur-duel" class="w-40 flex flex-col items-center">
                         <h2 class="text-white text-xl font-bold mb-3"></h2>
-                        <img src="./images/esclave3.png" class="w-full h-auto object-contain rounded-xl">
+                        <img src="./images/carte vide.png" class="w-full h-auto object-contain rounded-xl">
                     </div>
                 </div>
             </div>
@@ -129,6 +130,8 @@
             <!----------------Resultat du duel-------------->
             <section class="text-center mt-8">
                 <p id="resultat-duel" class="text-2xl font-bold text-[#C5A05A]">EN attente du duel...
+                    </p>
+                    <button id="start-duel" class="chip px-6 py-3 rounded-xl bg-cover bg-red-500 bg-center text-white font-bold text-sm text-slate-900 hover:bg-amber-400 transition-colors">Commencer le duel</button>
 
             </section>
 
@@ -141,12 +144,12 @@
                 <button id="Rejouer"
                     class="text-white bg-amber-500 hover:bg-amber-600 px-6 py-2 rounded-lg font-bold">Rejouer ↺</button>
             </section>
-            
 
-            
-        <script type="module" src="./src/game.js"></script>
-        
-            
+
+
+            <script type="module" src="./src/game.js"></script>
+
+
 </body>
 
 </html>
