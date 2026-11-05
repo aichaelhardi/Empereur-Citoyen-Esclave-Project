@@ -110,6 +110,6 @@ cartesJoueur.addEventListener("click" ,function(e){
     const indexOrdinateur = choisircartesOrdinateur();
     const carteOrdinateur = mainOrdinateur[indexOrdinateur];
     console.log("carte joueur: ",carteJoueur)
-    console.log("carteOrdinateur: " ,carteOrdinateur);
+    console.log("carteOrdinateur: " ,carteOrdinateur)
 });
 
