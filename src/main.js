@@ -2,6 +2,7 @@
 import { profils as profilsData } from "./data.js";
 import { afficherProfils } from "./ui.js";
 import { AjouterProfil } from "./players.js";
+import { sauvgarderJoueur } from "./storage.js";        
 let profils = [...profilsData];
 //afficher les profils
 afficherProfils(profils);
@@ -86,6 +87,7 @@ profilesContainer.addEventListener("click",function(e){
     if(e.target.classList.contains("choisir-btn")){
         const id = e.target.dataset.id;
         joueurActuel = profils.find(p => p.id === id);
+        sauvgarderJoueur(joueurActuel);
         document.getElementById("joueur-actuel").textContent = "joueur : " +joueurActuel.nickname
     }
     });

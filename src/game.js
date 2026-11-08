@@ -1,5 +1,11 @@
-const finPartie =
-document.getElementById("fin-partie");
+ import { recupererJoueur } from "./storage.js";
+const joueurSelectionne =recupererJoueur();  
+if(joueurSelectionne) {
+    joueurInfo.textContent=`Premier à jouer:${joueurSelectionne.nickname}`;
+}  
+import { incrementerPartiesJouees } from "./storage.js";    
+      
+const finPartie =document.getElementById("fin-partie");
 const btnRejouer = document.getElementById("rejouer");
 const resultatFinal = document.getElementById("resultat-final");
 
