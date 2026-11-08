@@ -154,5 +154,5 @@ cartesJoueur.addEventListener("click" ,function(e){
      mainOrdinateur.splice(indexOrdinateur, 1);
      afficherCartes();
   
-});
+})
 
