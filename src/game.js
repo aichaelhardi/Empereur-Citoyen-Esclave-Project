@@ -68,6 +68,10 @@ const carteJoueurDuel =document.getElementById("carte-joueur-duel");
 const carteOrdinateurDuel= document.getElementById("carte-ordinateur-duel");
 const btnStart=document.getElementById("start-duel");
 const resultatDuel =document.getElementById("resultat-duel");
+const mancheInfo =document.getElementById("manche");
+const campInfo =document.getElementById("camp-joueur");
+const joueurInfo=document.getElementById("premier-joueur");
+const groupeInfo = document.getElementById("groupe");
 function afficherCartes(){
     cartesJoueur.innerHTML="";
     cartesOrdinateur.innerHTML="";
@@ -96,6 +100,8 @@ afficherCartes();
 let scoreJoueur = 0;
 let scoreOrdinateur = 0;
 let mancheActuelle = 1;
+let groupeActuel = 1;
+let campJoueur ="Empereur";
 let joueurPeutJouer = true;
 function choisircartesOrdinateur(){
     const index = Math.floor (Math.random()*mainOrdinateur.length);
@@ -118,26 +124,54 @@ function duel(carteJoueur,carteOrdinateur){
     return "défaite";
    }
 }
+function calculerPoints(carteJoueur,carteOrdinateur){
+
+ const resultat =duel(carteJoueur,carteOrdinateur);
+
+ if(resultat === "égalité"){
+    return;
+ }
+let points =1;
+
+ if((carteJoueur === "Esclave"&& carteOrdinateur==="Empereur") || (carteJoueur ==="Empereur" && carteOrdinateur==="Esclave")){
+        points = 5;
+    }
+    if(resultat === "victoire"){
+        scoreJoueur += points;
+    }else{
+        scoreOrdinateur += points;
+    }
+ } 
+
+function afficherScore(){
+    document.getElementById("score").textContent = `score [${scoreJoueur}-${scoreOrdinateur}]`;
+}
+
 joueurPeutJouer = false;
 btnStart.addEventListener("click",function(){
     resultatDuel.textContent="";
     joueurPeutJouer=true;
-    btnStart.classList.add();
+    btnStart.classList.add("hidden");
 });
 cartesJoueur.addEventListener("click" ,function(e){
     if(!joueurPeutJouer){
         return;
     }
     const carteCliquee = e.target.closest("img");
-    if(!carteCliquee){
+    if(!carteCliquee||carteCliquee.dataset.index === undefined){
         return;
-    }
+    } joueurPeutJouer=false;
     const index = Number(carteCliquee.dataset.index);
     const carteJoueur = mainJoueur[index];
     const indexOrdinateur = choisircartesOrdinateur();
     const carteOrdinateur = mainOrdinateur[indexOrdinateur];
     const imageJoueur = cartes.find (c=> c.nom === carteJoueur);
     const imageOrdinateur = cartes .find(c=> c.nom === carteOrdinateur);
+    //calculer score
+    const  resultat = duel (carteJoueur,carteOrdinateur);
+    calculerPoints(carteJoueur,carteOrdinateur);
+    afficherScore();
+    resultatDuel.textContent=resultat;
 
     carteJoueurDuel.innerHTML ="";
     const imgJoueur=document.createElement("img");
@@ -150,9 +184,68 @@ cartesJoueur.addEventListener("click" ,function(e){
     imgOrdinateur .className ="w-36";
     carteOrdinateurDuel.appendChild(imgOrdinateur);
      //affichage du carte choisi au duel actuel
-     mainJoueur.splice(index, 1);
-     mainOrdinateur.splice(indexOrdinateur, 1);
+     mainJoueur =[...mainJoueur];
+     mainOrdinateur=[...mainOrdinateur];
+     mainJoueur.splice(index,1);
+     mainOrdinateur.splice(indexOrdinateur,1);
+     
      afficherCartes();
+     setTimeout(() => {
+         if(mainJoueur.length === 0){
+                terminerManche();
+         }else{
+            if(resultat === "égalité"){
+            resultatDuel.textContent = "égalité ! Rejouez.";
+            }
+            btnStart.classList.remove("hidden");
+            joueurPeutJouer = false ;
+            }
+        
+     },1000);
   
-})
+});
+//terminer manche
+function terminerManche(){
+   
+    if(mancheActuelle ===12){
+        finPartie .classList .remove("hidden");
 
+        if(scoreJoueur > scoreOrdinateur){
+            resultatFinal.textContent ="vous avez gagné !";
+        } else if(scoreJoueur < scoreOrdinateur){
+            resultatFinal.textContent ="ordinateur gagné !";
+        } 
+        else {
+            resultatFinal.textContent ="égalité générale !";
+        } 
+        joueurPeutJouer = false;
+        return;
+        }
+        //changer camp aprés manches
+    if(mancheActuelle=== 3 || mancheActuelle===6||mancheActuelle===9){
+        if(campJoueur === "Empereur"){
+            campJoueur ="Esclave";
+        } else{
+            campJoueur ="Empereur";
+        }
+    }
+   mancheActuelle++;
+   groupeActuel = Math.ceil(mancheActuelle/3);
+   afficherInfos();
+   
+   //distribuer 5 nouvelles cartes
+distribuerCartes("Empereur");
+afficherCartes();
+afficherInfos();
+
+carteJoueurDuel.innerHTML="";
+carteOrdinateurDuel.innerHTML="";
+resultatDuel.textContent="Nouvelle manche!";
+btnStart.classList.remove("hidden");
+joueurPeutJouer =false;
+}
+function afficherInfos (){
+    mancheInfo.textContent =`Manche ${mancheActuelle}/12`;
+    campInfo.textContent =`Camp:${campJoueur}`;
+    groupeInfo.textContent =`Groupe${groupeActuel}/4`;
+}
