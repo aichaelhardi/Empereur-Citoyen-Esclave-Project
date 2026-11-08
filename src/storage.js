@@ -18,3 +18,15 @@ export function incrementerPartiesJouees(){
         localStorage.setItem("joueurActuel",JSON.stringify(joueur));
     }
 }
+//sauvgarder tous les profils
+export function sauvgarderProfils (profils){
+    localStorage.setItem("profils", JSON.stringify(profils));
+}
+//recuperer profils
+export function recupererProfils(profilsData){
+    const profilsSauvegardes = localStorage.getItem("profils");
+    if(profilsSauvegardes){
+        return
+        JSON.parse(profilsSauvegardes);
+    } return profilsData;
+}

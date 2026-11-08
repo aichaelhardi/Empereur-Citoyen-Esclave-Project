@@ -2,7 +2,10 @@
 import { profils as profilsData } from "./data.js";
 import { afficherProfils } from "./ui.js";
 import { AjouterProfil } from "./players.js";
-import { sauvgarderJoueur } from "./storage.js";        
+import { sauvgarderJoueur ,
+        sauvgarderProfils,
+        recupererProfils,
+} from "./storage.js";        
 let profils = [...profilsData];
 //afficher les profils
 afficherProfils(profils);
