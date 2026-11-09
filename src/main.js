@@ -2,11 +2,13 @@
 import { profils as profilsData } from "./data.js";
 import { afficherProfils } from "./ui.js";
 import { AjouterProfil } from "./players.js";
-import { sauvgarderJoueur ,
-        sauvgarderProfils,
-        recupererProfils,
-} from "./storage.js";        
-let profils = [...profilsData];
+import {
+    sauvgarderJoueur,
+    recupererJoueur,
+    sauvgarderProfils,
+    recupererProfils
+} from "./storage.js";    
+let profils = recupererProfils(profilsData);
 //afficher les profils
 afficherProfils(profils);
 const addButton = document.getElementById("add-profile");
@@ -18,7 +20,7 @@ const profilesContainer = document.getElementById("profiles-container");
 //variable pour modification
 
 let profilAModifier = null;
-let joueurActuel = null;
+let joueurActuel = recupererJoueur();
 
 //afficher formulaire
 addButton.addEventListener("click", function () {
@@ -81,6 +83,7 @@ profilesContainer.addEventListener("click", function (e) {
         const confirmation = confirm("voulez vous supprimer ce profil?");
         if (confirmation) {
             profils = profils.filter(p => p.id != id);
+            sauvgarderProfils(profils);
             afficherProfils(profils);
         }
     }

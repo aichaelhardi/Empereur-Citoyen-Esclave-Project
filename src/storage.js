@@ -1,32 +1,41 @@
-// sauvgarder joueur
-export function sauvgarderJoueur(joueur){
+// Sauvegarder le joueur
+export function sauvgarderJoueur(joueur) {
     localStorage.setItem("joueurActuel", JSON.stringify(joueur));
 }
-//récupérer joueur
-export function recupererJoueur(){
-    return
-    JSON.parse(localStorage.getItem("joueurActuel"));
+
+// Récupérer le joueur
+export function recupererJoueur() {
+    return JSON.parse(localStorage.getItem("joueurActuel"));
 }
-//supprimer joueur
-export function supprimerJoueur(){
+
+// Supprimer le joueur
+export function supprimerJoueur() {
     localStorage.removeItem("joueurActuel");
 }
-export function incrementerPartiesJouees(){
-    const joueur = JSON.parse(localStorage.getItem("joueurActuel"));
-    if(joueur){
-        joueur.partiesJouees = (joueur.partiesJouees||0)+1;
-        localStorage.setItem("joueurActuel",JSON.stringify(joueur));
+
+// Incrémenter les parties jouées
+export function incrementerPartiesJouees() {
+    const joueur = recupererJoueur();
+
+    if (joueur) {
+        joueur.partiesJouees = (joueur.partiesJouees || 0) + 1;
+        sauvgarderJoueur(joueur);
     }
 }
-//sauvgarder tous les profils
-export function sauvgarderProfils (profils){
+
+// Sauvegarder tous les profils
+export function sauvgarderProfils(profils) {
     localStorage.setItem("profils", JSON.stringify(profils));
 }
-//recuperer profils
-export function recupererProfils(profilsData){
-    const profilsSauvegardes = localStorage.getItem("profils");
-    if(profilsSauvegardes){
-        return
-        JSON.parse(profilsSauvegardes);
-    } return profilsData;
+
+// Récupérer les profils
+export function recupererProfils(profilsData) {
+    const profils = localStorage.getItem("profils");
+
+    if (profils !== null) {
+        return JSON.parse(profils);
+    }
+
+    return profilsData;
 }
+
