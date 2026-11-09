@@ -38,4 +38,30 @@ export function recupererProfils(profilsData) {
 
     return profilsData;
 }
+//incrementer partie joueur
+export function incrementerPartiesJouees() {
+
+    const joueur = recupererJoueur();
+
+    if (!joueur) return;
+
+    // Récupérer tous les profils
+    const profils = JSON.parse(localStorage.getItem("profils")) || [];
+
+    // Trouver le joueur dans la liste
+    const index = profils.findIndex(p => p.id === joueur.id);
+
+    if (index !== -1) {
+
+        // Augmenter le nombre de parties
+        profils[index].partiesJouees =
+            (profils[index].partiesJouees || 0) + 1;
+
+        // Sauvegarder les profils
+        sauvgarderProfils(profils);
+
+        // Mettre à jour le joueur actuel
+        sauvgarderJoueur(profils[index]);
+    }
+}
 

@@ -1,4 +1,6 @@
  import { recupererJoueur } from "./storage.js";
+ import { incrementerPartiesJouees } from "./storage.js";
+
 const joueurSelectionne =recupererJoueur();  
 if(joueurSelectionne) {
     joueurInfo.textContent=`Premier à jouer:${joueurSelectionne.nickname}`;
@@ -243,6 +245,7 @@ function terminerManche(){
 distribuerCartes("Empereur");
 afficherCartes();
 afficherInfos();
+incrementerPartiesJouees();
 
 carteJoueurDuel.innerHTML="";
 carteOrdinateurDuel.innerHTML="";
