@@ -2,105 +2,247 @@
 import { profils as profilsData } from "./data.js";
 import { afficherProfils } from "./ui.js";
 import { AjouterProfil } from "./players.js";
-let profils = [...profilsData];
-//afficher les profils
+
+import {
+    sauvgarderJoueur,
+    recupererJoueur,
+    sauvgarderProfils,
+    recupererProfils
+} from "./storage.js";
+
+// Récupérer les profils sauvegardés
+let profils = recupererProfils(profilsData);
+
+// Récupérer le joueur sélectionné
+let joueurActuel = recupererJoueur();
+
+// Afficher les profils
 afficherProfils(profils);
+
+// Éléments HTML
 const addButton = document.getElementById("add-profile");
 const formContainer = document.getElementById("profile-form-container");
 const form = document.getElementById("profile-form");
 const nickname = document.getElementById("nickname");
 const avatar = document.getElementById("avatar");
 const profilesContainer = document.getElementById("profiles-container");
-//variable pour modification
+const error = document.getElementById("nickname-error");
+const formTitle = document.getElementById("form-title");
 
+// Variable pour modification
 let profilAModifier = null;
-let joueurActuel = null;
 
-//afficher formulaire
+
+// Ouvrir le formulaire pour ajouter un profil
 addButton.addEventListener("click", function () {
+
+    profilAModifier = null;
+
+    form.reset();
+    error.textContent = "";
+
+    formTitle.textContent = "Ajouter un profil";
+
     formContainer.classList.remove("hidden");
     formContainer.classList.add("flex");
 });
 
-form.addEventListener("submit", function (e) {
-    e.preventDefault();
-    //validation pseudo
-    const pseudo = nickname.value.trim();
-    const regex = /^[A-Za-z0-9]{3,15}$/;
-    const error = document.getElementById("nickname-error");
-    error.textContent = "";
-    if (!regex.test(pseudo)) {
-        error.textContent = "pseudo invalide (3 à 15 caractères)";
-        return;
-    }
-    const existe = profils.some(profil => profil.nickname.toLowerCase() === pseudo.toLowerCase());
-    if (existe) {
-        error.textContent = "ce pseudo est existe déja";
-        return;
-    }
-    if (avatar.value === "") {
-        alert("choisissez un avatar");
-        return;
 
+// Ajouter ou modifier un profil
+form.addEventListener("submit", function (e) {
+
+    e.preventDefault();
+
+    const pseudo = nickname.value.trim();
+
+    // Validation du pseudo
+    const regex = /^[A-Za-z0-9]{3,15}$/;
+
+    error.textContent = "";
+
+    if (!regex.test(pseudo)) {
+        error.textContent = "Pseudo invalide (3 à 15 caractères)";
+        return;
     }
-    //ajout profil
+
+    // Vérifier si le pseudo existe déjà
+    const existe = profils.some(profil =>
+        profil.nickname.toLowerCase() === pseudo.toLowerCase() &&
+        String(profil.id) !== String(profilAModifier)
+    );
+
+    if (existe) {
+        error.textContent = "Ce pseudo existe déjà";
+        return;
+    }
+
+    // Vérifier l'avatar
+    if (avatar.value === "") {
+        alert("Choisissez un avatar");
+        return;
+    }
+
+    // Modifier un profil
     if (profilAModifier !== null) {
-        const profil = profils.find(p => p.id == profilAModifier);
+
+        const profil = profils.find(
+            p => String(p.id) === String(profilAModifier)
+        );
+
+        if (!profil) {
+            alert("Profil introuvable");
+            return;
+        }
+
         profil.nickname = pseudo;
         profil.avatar = avatar.value;
+
         profilAModifier = null;
-    } else {
-        profils = AjouterProfil(profils, pseudo, avatar.value);
+
     }
-    afficherProfils(profils)
+
+    // Ajouter un nouveau profil
+    else {
+
+        profils = AjouterProfil(profils, pseudo, avatar.value);
+
+    }
+
+    // Sauvegarder les profils
+    sauvgarderProfils(profils);
+
+    // Actualiser l'affichage
+    afficherProfils(profils);
+
+    // Réinitialiser le formulaire
     form.reset();
+
+    formTitle.textContent = "Ajouter un profil";
+
     formContainer.classList.add("hidden");
     formContainer.classList.remove("flex");
+
 });
-//Modifier profil
+
+
+// Modifier et supprimer et choisir un profil
 profilesContainer.addEventListener("click", function (e) {
+
+    // Modifier un profil
     if (e.target.classList.contains("modifier-btn")) {
+
         const id = e.target.dataset.id;
-        const profil = profils.find(p => p.id === id);
+
+        const profil = profils.find(
+            p => String(p.id) === String(id)
+        );
+
+        if (!profil) return;
+
         profilAModifier = id;
+
         nickname.value = profil.nickname;
         avatar.value = profil.avatar;
+
+        error.textContent = "";
+
+        formTitle.textContent = "Modifier un profil";
+
         formContainer.classList.remove("hidden");
         formContainer.classList.add("flex");
-        document.getElementById("form-title").textContent = "Modifier un profil";
+
     }
-});
-//supprimer profil
-profilesContainer.addEventListener("click", function (e) {
+
+
+    // Supprimer un profil
     if (e.target.classList.contains("supprimer-btn")) {
+
         const id = e.target.dataset.id;
-        const confirmation = confirm("voulez vous supprimer ce profil?");
+
+        const confirmation = confirm(
+            "Voulez-vous supprimer ce profil ?"
+        );
+
         if (confirmation) {
-            profils = profils.filter(p => p.id != id);
+
+            profils = profils.filter(
+                p => String(p.id) !== String(id)
+            );
+
+           
+            if (
+                joueurActuel &&
+                String(joueurActuel.id) === String(id)
+            ) {
+
+                joueurActuel = null;
+
+                localStorage.removeItem("joueurActuel");
+
+                const joueurInfo = document.getElementById("joueur-actuel");
+
+                if (joueurInfo) {
+                    joueurInfo.textContent = "Aucun joueur sélectionné";
+                }
+
+            }
+
+            sauvgarderProfils(profils);
+
             afficherProfils(profils);
+
         }
+
     }
-});
-//choisir un joueur:
-profilesContainer.addEventListener("click",function(e){
-    if(e.target.classList.contains("choisir-btn")){
+
+
+    // Choisir un joueur
+    if (e.target.classList.contains("choisir-btn")) {
+
         const id = e.target.dataset.id;
-        joueurActuel = profils.find(p => p.id === id);
-        document.getElementById("joueur-actuel").textContent = "joueur : " +joueurActuel.nickname
+
+        joueurActuel = profils.find(
+            p => String(p.id) === String(id)
+        );
+
+        if (!joueurActuel) return;
+
+        // Sauvegarder le joueur sélectionné
+        sauvgarderJoueur(joueurActuel);
+
+        // Afficher le joueur actuel
+        const joueurInfo = document.getElementById("joueur-actuel");
+
+        if (joueurInfo) {
+            joueurInfo.textContent =
+                "Joueur : " + joueurActuel.nickname;
+        }
+
     }
-    });
+
+});
+
+
+// Commencer une partie
 const commencerButton = document.getElementById("commencer-partie");
-commencerButton.addEventListener("click" ,function(){
-    if(joueurActuel === null){
-        alert ("veuillez choisir un joueur avant de commencer !");
+
+commencerButton.addEventListener("click", function () {
+
+    if (joueurActuel === null) {
+
+        alert("Veuillez choisir un joueur avant de commencer !");
+
         return;
     }
-    
-    alert("bonne chance " + joueurActuel.nickname );
-    
+
+    alert("Bonne chance " + joueurActuel.nickname);
+
     window.location.href = "./jouer.html";
+
 });
-const profil = profils.find( p => p.id === PageTransitionEvent.playerId);
-const pseudo = profil? profil.nickname : "Joueur supprimé";
 
 
+// Récupérer le pseudo du joueur
+const pseudo = joueurActuel
+    ? joueurActuel.nickname
+    : "Joueur supprimé";
